@@ -1,22 +1,60 @@
 import Foundation
 
-enum WinterRoutine {
-    static let items: [RoutineItem] = [
-        .init(id: "wake", start: "7:30 AM", end: "7:40 AM", title: "Wake gently", note: "Open the curtains, hydrate, and begin after sunrise.", minutes: 10, category: .morning),
-        .init(id: "ready", start: "7:40 AM", end: "8:10 AM", title: "Get ready + breakfast", note: "A simple breakfast and an unhurried start.", minutes: 30, category: .morning),
-        .init(id: "prep", start: "8:10 AM", end: "8:40 AM", title: "Final preparation", note: "Pack essentials and prepare to leave after the kids' drop-off.", minutes: 30, category: .morning),
-        .init(id: "commute-in", start: "8:40 AM", end: "9:00 AM", title: "Commute to work", note: "Use the transition for music, a podcast, or quiet.", minutes: 20, category: .work),
-        .init(id: "work-am", start: "9:00 AM", end: "12:00 PM", title: "Focused work", note: "Protect this block for your highest-value iOS work.", minutes: 180, category: .work),
-        .init(id: "lunch", start: "12:00 PM", end: "12:30 PM", title: "Lunch break", note: "Eat away from the desk and reset.", minutes: 30, category: .personal),
-        .init(id: "work-pm", start: "12:30 PM", end: "4:40 PM", title: "Work + wrap-up", note: "Write tomorrow's first step before leaving.", minutes: 250, category: .work),
-        .init(id: "commute-home", start: "4:40 PM", end: "5:00 PM", title: "Commute home", note: "Close the workday and arrive by 5:00 PM.", minutes: 20, category: .work),
-        .init(id: "reconnect", start: "5:00 PM", end: "5:15 PM", title: "Reconnect", note: "Greet the kids, change, and have a quick snack.", minutes: 15, category: .family),
-        .init(id: "bath", start: "5:15 PM", end: "5:45 PM", title: "Kids' bath time", note: "Freshen up after school and daycare.", minutes: 30, category: .family),
-        .init(id: "study", start: "5:45 PM", end: "6:30 PM", title: "Study + reading", note: "Homework with your son; a quiet activity for your daughter.", minutes: 45, category: .family),
-        .init(id: "creative", start: "6:30 PM", end: "7:00 PM", title: "Creative pocket", note: "Rotate embroidery, sewing practice, and home design.", minutes: 30, category: .personal),
-        .init(id: "dinner", start: "7:00 PM", end: "7:30 PM", title: "Family dinner", note: "Dinner is prepared by your husband; enjoy it together.", minutes: 30, category: .family),
-        .init(id: "bedtime", start: "7:30 PM", end: "8:30 PM", title: "Kids' bedtime", note: "Wind down, share stories, and settle both children.", minutes: 60, category: .family),
-        .init(id: "restore", start: "8:30 PM", end: "9:15 PM", title: "Restore yourself", note: "Choose creativity, reading, or simply rest.", minutes: 45, category: .personal),
-        .init(id: "sleep", start: "9:15 PM", end: "9:30 PM", title: "Bedtime routine", note: "Prepare for sleep and protect tomorrow's energy.", minutes: 15, category: .personal)
+enum FamilyRoutine {
+    static let items: [RoutineItem] = weekday + weekend
+
+    static let weekday: [RoutineItem] = [
+        item("weekday-dad-exercise", .weekday, .dad, 360, 390, "Morning exercise", "A short workout before the household wakes.", .personal),
+        item("weekday-family-breakfast", .weekday, .shared, 450, 480, "Breakfast together", "Start the day connected and ready.", .morning),
+        item("weekday-dad-dropoff", .weekday, .dad, 480, 520, "School + daycare drop-off", "Dad handles bags, lunchboxes, and drop-off by 8:30.", .family),
+        item("weekday-mum-ready", .weekday, .mum, 480, 520, "Prepare for work", "Finish getting ready while Dad handles drop-off.", .morning),
+        item("weekday-mum-commute-in", .weekday, .mum, 520, 540, "Commute to work", "Leave at 8:40 and arrive for a 9:00 start.", .work),
+        item("weekday-mum-work", .weekday, .mum, 540, 1000, "iOS workday", "Seven focused hours plus a forty-minute lunch and reset.", .work),
+        item("weekday-dad-work", .weekday, .dad, 540, 960, "Business analysis", "Protect focus time and finish in time for pickup.", .work),
+        item("weekday-dad-pickup", .weekday, .dad, 960, 1020, "School + daycare pickup", "Dad brings both children home.", .family),
+        item("weekday-mum-commute-home", .weekday, .mum, 1000, 1020, "Commute home", "Close the workday and arrive by 5:00.", .work),
+        item("weekday-kids-bath", .weekday, .mum, 1035, 1065, "Kids' bath time", "Freshen up after school and daycare.", .family),
+        item("weekday-study", .weekday, .mum, 1065, 1110, "Study + reading", "Homework with the eldest and a quiet activity for the youngest.", .family),
+        item("weekday-dad-dinner", .weekday, .dad, 1020, 1110, "Prepare dinner", "Dad prepares a practical family meal.", .family),
+        item("weekday-family-dinner", .weekday, .shared, 1110, 1150, "Family dinner", "Eat together and share the day's stories.", .family),
+        item("weekday-bedtime", .weekday, .shared, 1150, 1210, "Kids' bedtime", "Stories, connection, and settling both children.", .family),
+        item("weekday-mum-creative", .weekday, .mum, 1210, 1260, "Creative practice", "Rotate embroidery, sewing, and new-home planning.", .personal),
+        item("weekday-dad-garden", .weekday, .dad, 1210, 1260, "Garden + reset", "Water, tend plants, or plan the garden.", .personal),
+        item("weekday-wind-down", .weekday, .shared, 1260, 1320, "Wind down together", "Prepare for tomorrow and protect sleep.", .personal)
     ]
+
+    static let weekend: [RoutineItem] = [
+        item("weekend-slow-start", .weekend, .shared, 450, 510, "Slow family breakfast", "A calm start without the weekday rush.", .morning),
+        item("weekend-dad-garden", .weekend, .dad, 510, 600, "Gardening", "A longer focused garden session.", .personal),
+        item("weekend-mum-craft", .weekend, .mum, 510, 600, "Embroidery or sewing", "Protected creative practice while Dad gardens.", .personal),
+        item("weekend-family-active", .weekend, .shared, 630, 750, "Cycling or swimming", "Build confidence and enjoy movement with the children.", .family),
+        item("weekend-lunch", .weekend, .shared, 750, 810, "Lunch together", "Refuel and choose the afternoon rhythm.", .family),
+        item("weekend-home-planning", .weekend, .mum, 840, 930, "New-home planning", "Review rooms, finishes, storage, and decorating decisions.", .personal),
+        item("weekend-dad-exercise", .weekend, .dad, 840, 900, "Exercise", "A ride, run, swim, or strength session.", .personal),
+        item("weekend-family-free", .weekend, .shared, 960, 1080, "Family free time", "Play, visit friends, or take a relaxed outing.", .family),
+        item("weekend-dinner", .weekend, .dad, 1080, 1140, "Prepare dinner", "Dad cooks while the children wind down.", .family),
+        item("weekend-bedtime", .weekend, .shared, 1140, 1230, "Dinner + bedtime", "Close the day together.", .family)
+    ]
+
+    private static func item(
+        _ id: String,
+        _ schedule: ScheduleKind,
+        _ owner: FamilyMember,
+        _ start: Int,
+        _ end: Int,
+        _ title: String,
+        _ note: String,
+        _ category: RoutineItem.Category
+    ) -> RoutineItem {
+        .init(
+            id: id,
+            schedule: schedule,
+            owner: owner,
+            startMinutes: start,
+            endMinutes: end,
+            title: title,
+            note: note,
+            category: category
+        )
+    }
 }
