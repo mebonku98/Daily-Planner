@@ -1,14 +1,23 @@
 # Daily Planner
 
-A native SwiftUI iOS app for visualising and completing a balanced daily routine across work, family care, and personal time.
+A native SwiftUI iOS 17 app for coordinating a practical family routine across work, childcare, home life, movement, and creative time.
 
-## First release
+## Family Week MVP
 
-- Winter weekday routine beginning at 7:30 AM
-- Start/end times and duration for every activity
-- Interactive checklist with progress saved on-device
-- Daily time-allocation donut chart
-- Filters for morning, work, family, and personal activities
+- Coordinated weekday and weekend plans for Mum, Dad, and shared family time
+- Family-member filters and visible responsibility ownership
+- Editable activities with schedule, owner, category, notes, and start/end times
+- Add, delete, and reorder controls
+- Double-booking warnings, including shared activities that require both parents
+- Interactive daily checklist with on-device persistence
+- Time-allocation chart for the selected schedule
+- Accessible labels, hints, controls, and Dynamic Type-compatible layouts
+
+The starter templates reflect the family's current rhythm:
+
+- Dad handles school/daycare drop-off and pickup, lunchboxes, and dinner preparation
+- Mum has a seven-hour iOS workday with commute time
+- Bath, study, bedtime, family meals, exercise, gardening, embroidery, sewing, home planning, cycling, and swimming all have protected space
 
 ## Requirements
 
@@ -24,12 +33,20 @@ xcodegen generate
 open DailyPlanner.xcodeproj
 ```
 
-`project.yml` is the source of truth for the generated Xcode project.
+`project.yml` is the source of truth for the generated Xcode project. The generated `.xcodeproj` is intentionally not committed.
+
+## Architecture
+
+- `FamilyRoutine` supplies safe weekday and weekend templates.
+- `RoutineStore` owns editing, filtering, completion state, and JSON persistence in `UserDefaults`.
+- `ScheduleValidator` reports overlapping commitments for each parent.
+- SwiftUI views render the family timeline and activity editor.
+- Unit tests cover persistence, validation, filtering, invalid input, and template integrity.
 
 ## Roadmap
 
-1. Edit and reorder routine activities
-2. Weekday, weekend, summer, and school-holiday schedules
-3. Coordinated family views
-4. Calendar export and reminders
-5. Optional iCloud sync
+1. Calendar-based day selection and recurring weekly patterns
+2. Local notifications and calendar export
+3. Optional iCloud family sync
+4. Widgets and Live Activities
+5. Seasonal and school-holiday template packs
