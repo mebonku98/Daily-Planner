@@ -43,6 +43,10 @@ open DailyPlanner.xcodeproj
 - SwiftUI views render the family timeline and activity editor.
 - Unit tests cover persistence, validation, filtering, invalid input, and template integrity.
 
+## Product docs
+
+- [MVP specification](docs/MVP_SPECIFICATION.md)
+
 ## Roadmap
 
 1. Calendar-based day selection and recurring weekly patterns
