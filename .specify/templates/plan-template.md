@@ -44,6 +44,9 @@
   work, childcare, exercise, creative practice, home planning, and family time.
 - **Native SwiftUI Scope**: Plan targets iOS 17+, SwiftUI, and the existing app/store/model
   boundaries. Any new dependency or abstraction has a documented reason.
+- **Clean Architecture Boundaries**: Plan identifies the domain, application/state,
+  infrastructure/persistence, and presentation layer placement for each changed type.
+  Dependencies point inward; SwiftUI views do not own business rules or persistence.
 - **XcodeGen Source of Truth**: `project.yml` changes are planned when project structure
   changes. Generated `.xcodeproj`, product, or DerivedData artifacts are excluded.
 - **On-Device Privacy**: MVP data remains local. No backend, analytics, tracking, or network

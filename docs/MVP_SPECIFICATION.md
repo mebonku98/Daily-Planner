@@ -217,6 +217,7 @@ The weekend template must protect:
 - Native SwiftUI app
 - iOS 17 or later
 - Xcode project generated from XcodeGen
+- Clean Architecture boundaries for domain rules, app state, infrastructure, and SwiftUI presentation
 - No backend required
 
 ### Reliability

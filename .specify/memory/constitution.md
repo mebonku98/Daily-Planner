@@ -1,15 +1,13 @@
 <!--
 Sync Impact Report
-Version change: template -> 1.0.0
+Version change: 1.0.0 -> 1.1.0
 Modified principles:
-- Principle 1 placeholder -> I. Family Routine First
-- Principle 2 placeholder -> II. Native SwiftUI and XcodeGen Source of Truth
-- Principle 3 placeholder -> III. On-Device Privacy for MVP
-- Principle 4 placeholder -> IV. Accessibility and Calm Visual Design
-- Principle 5 placeholder -> V. Small, Testable, CI-Backed Changes
+- II. Native SwiftUI and XcodeGen Source of Truth -> II. Native SwiftUI and XcodeGen Source of Truth
+- III. On-Device Privacy for MVP -> IV. On-Device Privacy for MVP
+- IV. Accessibility and Calm Visual Design -> V. Accessibility and Calm Visual Design
+- V. Small, Testable, CI-Backed Changes -> VI. Small, Testable, CI-Backed Changes
 Added sections:
-- Product and Platform Constraints
-- Development Workflow
+- III. Clean Architecture Boundaries
 Removed sections:
 - None
 Templates requiring updates:
@@ -46,7 +44,18 @@ represented through XcodeGen when project structure changes.
 Rationale: A single reproducible project definition keeps GitHub review focused on
 source changes and prevents drift between generated Xcode state and committed source.
 
-### III. On-Device Privacy for MVP
+### III. Clean Architecture Boundaries
+Production code MUST follow Clean Architecture dependency direction. Domain models and
+domain rules MUST remain independent of SwiftUI, persistence, and platform frameworks
+unless the type is explicitly a platform boundary. Application state and use-case
+coordination MUST live outside views. SwiftUI views MUST render state and send user
+intent; they MUST NOT own persistence, validation policy, or scheduling business rules.
+Infrastructure code MUST depend inward on domain/application contracts, not the reverse.
+
+Rationale: Clear layer boundaries keep family scheduling rules testable, reusable, and
+safe to evolve as the app grows beyond the MVP.
+
+### IV. On-Device Privacy for MVP
 MVP family schedule data MUST remain on-device. The app MUST NOT introduce backend
 services, analytics, tracking SDKs, accounts, cloud sync, or network-required launch
 behavior without an explicit constitutional amendment or a post-MVP specification that
@@ -56,7 +65,7 @@ state.
 Rationale: Family schedules are sensitive, and the MVP can deliver value without a
 server-side data model.
 
-### IV. Accessibility and Calm Visual Design
+### V. Accessibility and Calm Visual Design
 User-facing features MUST support Dynamic Type, VoiceOver labels and hints for
 important controls, and meaning that is not conveyed by color alone. Visual design MUST
 stay calm, legible, and routine-focused: dense enough for family planning, restrained in
@@ -65,7 +74,7 @@ decoration, and clear about time, ownership, completion, and conflicts.
 Rationale: The app is used during busy family routines, so it must remain readable,
 predictable, and accessible under real-world conditions.
 
-### V. Small, Testable, CI-Backed Changes
+### VI. Small, Testable, CI-Backed Changes
 Changes MUST be scoped to the requested behavior and existing SwiftUI/store/model
 boundaries. Behavior changes MUST include focused tests or a documented validation path.
 Store and model logic MUST prefer Swift Testing unit coverage; user-facing flows SHOULD
@@ -83,6 +92,8 @@ model evolves.
 - The app MUST launch without network access and provide default routine content on first
   launch.
 - Schedule conflict detection MUST account for shared activities requiring both parents.
+- Source layout MUST make Clean Architecture boundaries visible through folders, type
+  names, or plan documentation before new layers are introduced.
 - New dependencies MUST be justified in the implementation plan and kept minimal.
 - App behavior MUST align with the README and MVP specification unless those documents
   are intentionally updated in the same change.
@@ -94,6 +105,8 @@ model evolves.
   expectations, and measurable success criteria before planning.
 - Implementation plans MUST pass the Constitution Check before research and again after
   design.
+- Implementation plans MUST state which Clean Architecture layer owns each new or changed
+  type when the change touches models, validation, persistence, or app state.
 - Task lists MUST be organized as independently testable user-story increments with exact
   file paths.
 - Project structure changes MUST update `project.yml`; generated project files MUST remain
@@ -117,4 +130,4 @@ Compliance review is required during specification, planning, task generation, c
 review, and CI validation. If a feature cannot satisfy a MUST-level principle, the
 feature MUST stop until the plan is changed or this constitution is amended.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-22 | **Last Amended**: 2026-07-22
+**Version**: 1.1.0 | **Ratified**: 2026-07-22 | **Last Amended**: 2026-07-22

@@ -102,6 +102,8 @@
 
 - **Family Routine Fit**: [Explain how the feature supports work, childcare, exercise,
   creative practice, home planning, or family time without adding avoidable complexity]
+- **Architecture Boundary**: [Name the Clean Architecture layers affected and confirm
+  domain rules remain independent of SwiftUI and persistence details]
 - **Privacy Boundary**: [Confirm whether all MVP data remains on-device; any network,
   analytics, backend, or sync behavior requires explicit scope and rationale]
 - **Accessibility Expectations**: [Define Dynamic Type, VoiceOver, and non-color-only

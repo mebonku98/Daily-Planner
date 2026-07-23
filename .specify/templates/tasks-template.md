@@ -31,6 +31,10 @@ not practical, include a specific build/manual validation task and rationale.
   `DailyPlanner/DailyPlannerTests/` for unit tests, `DailyPlanner/DailyPlannerUITests/`
   for UI tests when present, and `project.yml` for project structure. Do not create or
   commit generated `.xcodeproj`, `Products/`, or DerivedData artifacts.
+- **Clean Architecture**: place domain entities and rules in Models or domain-focused
+  folders, app state/use-case coordination in Stores or application-focused folders,
+  persistence adapters in infrastructure-focused files, and rendering/interaction in
+  Views. Dependencies must point inward toward domain/application contracts.
 
 <!--
   ============================================================================
@@ -76,6 +80,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T008 Configure error handling and logging infrastructure
 - [ ] T009 Setup environment configuration management
 - [ ] T00X Confirm on-device persistence boundaries and no backend/analytics scope
+- [ ] T00X Confirm Clean Architecture layer placement and inward dependency direction
 - [ ] T00X Update project.yml only if files, targets, or dependencies change
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
@@ -161,6 +166,7 @@ Examples of foundational tasks (adjust based on your project):
 
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
+- [ ] TXXX Verify SwiftUI views do not own domain rules, validation policy, or persistence
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Accessibility pass for VoiceOver labels, Dynamic Type, and non-color-only meaning
 - [ ] TXXX [P] Additional focused tests in DailyPlanner/DailyPlannerTests/

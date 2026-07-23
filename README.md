@@ -37,6 +37,8 @@ open DailyPlanner.xcodeproj
 
 ## Architecture
 
+- The codebase follows Clean Architecture dependency direction: presentation depends on
+  app/domain behavior, while domain rules stay independent of SwiftUI and persistence.
 - `FamilyRoutine` supplies safe weekday and weekend templates.
 - `RoutineStore` owns editing, filtering, completion state, and JSON persistence in `UserDefaults`.
 - `ScheduleValidator` reports overlapping commitments for each parent.
