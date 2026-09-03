@@ -8,7 +8,7 @@ settings:
   base:
     SWIFT_VERSION: "5.9"
     CURRENT_PROJECT_VERSION: 1
-    MARKETING_VERSION: 0.1.0
+    MARKETING_VERSION: 0.2.0
 targets:
   DailyPlanner:
     type: application
@@ -18,7 +18,6 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.mebonku98.dailyplanner
-        PRODUCT_NAME: Daily Planner
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Daily Planner
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
